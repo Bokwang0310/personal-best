@@ -68,8 +68,17 @@ export default {
       }
       this.time.msec++;
     },
+    checkAllow(e, touchType) {
+      if (e.key) {
+        return e.key === " ";
+      } else if (e.type === touchType) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     onKeyDown(e) {
-      if (e.key === " " && this.isPlaying) {
+      if (this.checkAllow(e, "touchstart") && this.isPlaying) {
         console.log("stop");
         this.$store.commit("setPlayingState", false);
         clearInterval(this.interval);
@@ -78,7 +87,7 @@ export default {
           new Scrambow().get(1)[0].scramble_string
         );
       }
-      if (e.key === " " && !this.isReady) {
+      if (this.checkAllow(e, "touchstart") && !this.isReady) {
         this.setTimeColor("#F15625");
         this.isPressed = true;
         this.timeout = setTimeout(() => {
@@ -88,13 +97,13 @@ export default {
       }
     },
     onKeyUp(e) {
-      if (e.key === " " && this.isReady) {
+      if (this.checkAllow(e, "touchend") && this.isReady) {
         console.log("Go!");
         this.resetTimer();
         this.$store.commit("setPlayingState", true);
         this.interval = setInterval(this.increaseTime, 10);
       }
-      if (e.key === " ") {
+      if (this.checkAllow(e, "touchend")) {
         clearTimeout(this.timeout);
         this.setTimeColor("#000000");
         this.isPressed = false;
@@ -105,10 +114,16 @@ export default {
   mounted() {
     window.addEventListener("keydown", this.onKeyDown);
     window.addEventListener("keyup", this.onKeyUp);
+
+    window.addEventListener("touchstart", this.onKeyDown);
+    window.addEventListener("touchend", this.onKeyUp);
   },
   beforeDestroy() {
     window.removeEventListener("keydown", this.onKeyDown);
     window.removeEventListener("keyup", this.onKeyUp);
+
+    window.removeEventListener("touchstart", this.onKeyDown);
+    window.removeEventListener("touchend", this.onKeyUp);
   }
 };
 </script>

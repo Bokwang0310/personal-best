@@ -25,6 +25,7 @@ export default {
 * {
   margin: 0;
   font-family: "Roboto", sans-serif;
+  user-select: none;
 }
 
 html {
