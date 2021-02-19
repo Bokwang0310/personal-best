@@ -1,22 +1,19 @@
 <template>
   <div id="app">
     <SideBar />
-    <Scramble />
-    <StopWatch />
+    <Contents />
   </div>
 </template>
 
 <script>
-import StopWatch from "./components/StopWatch.vue";
 import SideBar from "./components/SideBar.vue";
-import Scramble from "./components/Scramble.vue";
+import Contents from "./components/Contents.vue";
 
 export default {
   name: "App",
   components: {
-    StopWatch,
     SideBar,
-    Scramble
+    Contents
   }
 };
 </script>
@@ -26,6 +23,7 @@ export default {
   margin: 0;
   font-family: "Roboto", sans-serif;
   user-select: none;
+  background-color: #fafafa;
 }
 
 html {
@@ -35,9 +33,6 @@ html {
 html,
 body,
 #app {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   width: 100%;
   height: 100vh;
 }

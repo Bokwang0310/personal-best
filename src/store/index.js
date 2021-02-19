@@ -8,7 +8,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isPlaying: false,
-    scramble: new Scrambow().get(1)[0].scramble_string
+    scramble: new Scrambow().get(1)[0].scramble_string,
+    isSideBarShow: false
   },
   mutations: {
     setScramble(state, newScramble) {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     },
     setPlayingState(state, newState) {
       state.isPlaying = newState;
+    },
+    setSideBarState(state, newState) {
+      state.isSideBarShow = newState;
     }
   }
 });
