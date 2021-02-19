@@ -22,7 +22,7 @@ export default {
 * {
   margin: 0;
   font-family: "Roboto", sans-serif;
-  user-select: none;
+  /* user-select: none; */
   background-color: #fafafa;
 }
 

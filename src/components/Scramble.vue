@@ -12,9 +12,8 @@ export default {
 <style scoped>
 .scramble {
   text-align: center;
-  font-size: 6.2vmin;
+  font-size: 3.5vmax;
   padding: 1rem;
   margin-bottom: 5vmin;
-  /* 3.5rem */
 }
 </style>

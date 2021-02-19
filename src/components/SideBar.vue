@@ -37,7 +37,6 @@ export default {
   transition: width 0.35s;
   background: #f2f2f2;
   width: 350px;
-  /* border-right: 0.5px #daded5 solid; */
   box-shadow: 3px 0px 25px -13px rgba(0, 0, 0, 0.62);
 }
 

@@ -23,7 +23,8 @@ export default {
         color: "#000000"
       },
       timeout: null,
-      interval: null
+      interval: null,
+      canReady: true
     };
   },
   computed: {
@@ -68,14 +69,41 @@ export default {
       }
       this.time.msec++;
     },
+    isTouchableArea(e) {
+      return (
+        e.target === document.querySelector(".contents-container") ||
+        e.target === document.querySelector(".scramble") ||
+        e.target === document.querySelector(".time")
+      );
+    },
+    checkSideBarPosition(position) {
+      return (
+        getComputedStyle(document.querySelector(".sidebar")).position ===
+        position
+      );
+    },
     checkAllow(e, touchType) {
+      if (!this.canReady) return false;
+
       if (e.key) {
         return e.key === " ";
-      } else if (e.type === touchType) {
-        return true;
-      } else {
+      }
+
+      // ...
+      if (e.type === touchType) {
+        if (this.isTouchableArea(e)) {
+          if (this.$store.state.isSideBarShow) {
+            if (this.checkSideBarPosition("relative")) {
+              return true;
+            }
+            return false;
+          }
+          return true;
+        }
         return false;
       }
+
+      return false;
     },
     onKeyDown(e) {
       if (this.checkAllow(e, "touchstart") && this.isPlaying) {
@@ -97,6 +125,14 @@ export default {
       }
     },
     onKeyUp(e) {
+      if (
+        this.$store.state.isSideBarShow &&
+        this.checkSideBarPosition("absolute") &&
+        this.isTouchableArea(e)
+      ) {
+        this.$store.commit("setSideBarState", false);
+      }
+
       if (this.checkAllow(e, "touchend") && this.isReady) {
         console.log("Go!");
         this.resetTimer();
@@ -130,8 +166,7 @@ export default {
 
 <style scoped>
 .time {
-  font-size: 22vmin;
-  /* 20rem */
+  font-size: 10vmax;
   text-align: center;
 }
 </style>
