@@ -13,7 +13,7 @@ export default {
 .scramble {
   text-align: center;
   font-size: 3.5vmax;
-  padding: 1rem;
+  padding: 2.2rem;
   margin-bottom: 5vmin;
 }
 </style>

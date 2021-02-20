@@ -1,9 +1,22 @@
 <template>
-  <aside
-    class="sidebar"
-    :class="$store.state.isSideBarShow ? '' : 'collapsed'"
-    v-show="!$store.state.isPlaying"
-  ></aside>
+  <div class="sidebar-container">
+    <aside
+      class="sidebar"
+      :class="$store.state.isSideBarShow ? '' : 'collapsed'"
+      v-show="!$store.state.isPlaying"
+    ></aside>
+    <font-awesome-icon
+      class="menu"
+      icon="bars"
+      size="4x"
+      @click="
+        $store.commit(
+          'setSideBarState',
+          $store.state.isSideBarShow ? false : true
+        )
+      "
+    />
+  </div>
 </template>
 
 <script>
@@ -29,6 +42,18 @@ export default {
 </script>
 
 <style scoped>
+.sidebar-container {
+  height: 100%;
+}
+
+.menu {
+  position: absolute;
+  margin-left: 2rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
 .sidebar {
   position: relative;
   height: 100%;
@@ -45,8 +70,10 @@ export default {
 }
 
 @media (max-width: 700px) {
-  .sidebar {
+  .sidebar-container {
     position: absolute;
+  }
+  .sidebar {
     width: 75vw;
   }
 }
