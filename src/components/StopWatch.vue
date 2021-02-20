@@ -29,14 +29,19 @@ export default {
   },
   computed: {
     timeStr() {
-      const msec = this.time.msec < 10 ? `0${this.time.msec}` : this.time.msec;
+      const msec = normalizeTime(this.time.msec);
+      const sec = normalizeTime(this.time.sec);
+
       if (this.time.min === 0) {
-        return `${this.time.sec}.${msec}`;
-      } else if (this.time.hour === 0) {
-        return `${this.time.min}:${this.time.sec}.${msec}`;
-      } else {
-        return `${this.time.hour}:${this.time.min}:${this.time.sec}.${msec}`;
+        return `${sec}.${msec}`;
       }
+
+      const min = normalizeTime(this.time.min);
+      if (this.time.hour === 0) {
+        return `${min}:${sec}.${msec}`;
+      }
+
+      return `${this.time.hour}:${min}:${sec}.${msec}`;
     },
     ...mapState(["isPlaying", "isSideBarShow"])
   },
@@ -67,19 +72,6 @@ export default {
       }
       this.time.msec++;
     },
-    isTouchableArea(e) {
-      return (
-        e.target === document.querySelector(".contents-container") ||
-        e.target === document.querySelector(".scramble") ||
-        e.target === document.querySelector(".time")
-      );
-    },
-    checkSideBarPosition(position) {
-      return (
-        getComputedStyle(document.querySelector(".sidebar")).position ===
-        position
-      );
-    },
     checkAllow(e, touchType) {
       if (!this.canReady) return false;
 
@@ -89,9 +81,9 @@ export default {
 
       // ...
       if (e.type === touchType) {
-        if (this.isTouchableArea(e)) {
+        if (isTouchableArea(e)) {
           if (this.isSideBarShow) {
-            if (this.checkSideBarPosition("relative")) return true;
+            if (checkSideBarPosition("relative")) return true;
             return false;
           }
           return true;
@@ -120,8 +112,8 @@ export default {
     onKeyUp(e) {
       if (
         this.isSideBarShow &&
-        this.checkSideBarPosition("absolute") &&
-        this.isTouchableArea(e)
+        checkSideBarPosition("absolute") &&
+        isTouchableArea(e)
       ) {
         this.setSideBarState(false);
       }
@@ -156,6 +148,16 @@ export default {
     window.removeEventListener("touchend", this.onKeyUp);
   }
 };
+
+const normalizeTime = time => (time < 10 ? `0${time}` : time);
+
+const checkSideBarPosition = position =>
+  getComputedStyle(document.querySelector(".sidebar")).position === position;
+
+const isTouchableArea = e =>
+  e.target === document.querySelector(".contents-container") ||
+  e.target === document.querySelector(".scramble") ||
+  e.target === document.querySelector(".time");
 </script>
 
 <style scoped>
