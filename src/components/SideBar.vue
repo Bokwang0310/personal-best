@@ -1,15 +1,20 @@
 <template>
   <div class="sidebar-container">
-    <aside
+    <div
       class="sidebar"
       :class="isSideBarShow ? '' : 'collapsed'"
       v-show="!isPlaying"
-    ></aside>
+    >
+      <div v-for="(item, i) in [1, 2, 3, 4, 5]" :key="i" class="list">
+        {{ `I have ${item}!` }}
+      </div>
+    </div>
     <font-awesome-icon
       class="menu"
       icon="bars"
       size="4x"
       @click="toggleSideBar"
+      v-show="!isPlaying"
     />
   </div>
 </template>
@@ -52,6 +57,9 @@ export default {
 
 .sidebar {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
   overflow: auto;
   float: left;
@@ -72,5 +80,10 @@ export default {
   .sidebar {
     width: 75vw;
   }
+}
+
+.list {
+  font-size: 4rem;
+  background-color: #f2f2f2;
 }
 </style>
