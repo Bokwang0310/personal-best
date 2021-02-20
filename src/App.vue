@@ -22,7 +22,6 @@ export default {
 * {
   margin: 0;
   font-family: "Roboto", sans-serif;
-  /* user-select: none; */
   background-color: #fafafa;
 }
 
@@ -39,6 +38,5 @@ body,
 
 #app {
   display: flex;
-  align-items: center;
 }
 </style>

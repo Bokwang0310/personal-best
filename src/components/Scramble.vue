@@ -1,14 +1,18 @@
 <template>
-  <div class="scramble" v-show="!$store.state.isPlaying">
-    {{ $store.state.scramble }}
+  <div class="scramble" v-show="!isPlaying">
+    {{ scramble }}
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-  name: "Scramble"
+  name: "Scramble",
+  computed: mapState(["isPlaying", "scramble"])
 };
 </script>
+
 <style scoped>
 .scramble {
   text-align: center;

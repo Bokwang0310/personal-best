@@ -2,35 +2,31 @@
   <div class="sidebar-container">
     <aside
       class="sidebar"
-      :class="$store.state.isSideBarShow ? '' : 'collapsed'"
-      v-show="!$store.state.isPlaying"
+      :class="isSideBarShow ? '' : 'collapsed'"
+      v-show="!isPlaying"
     ></aside>
     <font-awesome-icon
       class="menu"
       icon="bars"
       size="4x"
-      @click="
-        $store.commit(
-          'setSideBarState',
-          $store.state.isSideBarShow ? false : true
-        )
-      "
+      @click="toggleSideBar"
     />
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
+
 export default {
   name: "SideBar",
+  computed: mapState(["isSideBarShow", "isPlaying"]),
   methods: {
     onKeyDown(e) {
       if (e.ctrlKey && e.key === "b") {
-        this.$store.commit(
-          "setSideBarState",
-          this.$store.state.isSideBarShow ? false : true
-        );
+        this.toggleSideBar();
       }
-    }
+    },
+    ...mapMutations(["toggleSideBar"])
   },
   mounted() {
     window.addEventListener("keydown", this.onKeyDown);

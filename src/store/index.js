@@ -12,14 +12,17 @@ export default new Vuex.Store({
     isSideBarShow: false
   },
   mutations: {
-    setScramble(state, newScramble) {
-      state.scramble = newScramble;
+    makeNewScramble(state) {
+      state.scramble = new Scrambow().get(1)[0].scramble_string;
     },
     setPlayingState(state, newState) {
       state.isPlaying = newState;
     },
     setSideBarState(state, newState) {
       state.isSideBarShow = newState;
+    },
+    toggleSideBar(state) {
+      state.isSideBarShow = state.isSideBarShow ? false : true;
     }
   }
 });

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { Scrambow } from "scrambow";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "StopWatch",
@@ -28,9 +28,6 @@ export default {
     };
   },
   computed: {
-    isPlaying() {
-      return this.$store.state.isPlaying;
-    },
     timeStr() {
       const msec = this.time.msec < 10 ? `0${this.time.msec}` : this.time.msec;
       if (this.time.min === 0) {
@@ -40,7 +37,8 @@ export default {
       } else {
         return `${this.time.hour}:${this.time.min}:${this.time.sec}.${msec}`;
       }
-    }
+    },
+    ...mapState(["isPlaying", "isSideBarShow"])
   },
   methods: {
     setTimeColor(color) {
@@ -92,10 +90,8 @@ export default {
       // ...
       if (e.type === touchType) {
         if (this.isTouchableArea(e)) {
-          if (this.$store.state.isSideBarShow) {
-            if (this.checkSideBarPosition("relative")) {
-              return true;
-            }
+          if (this.isSideBarShow) {
+            if (this.checkSideBarPosition("relative")) return true;
             return false;
           }
           return true;
@@ -108,12 +104,9 @@ export default {
     onKeyDown(e) {
       if (this.checkAllow(e, "touchstart") && this.isPlaying) {
         console.log("stop");
-        this.$store.commit("setPlayingState", false);
+        this.setPlayingState(false);
         clearInterval(this.interval);
-        this.$store.commit(
-          "setScramble",
-          new Scrambow().get(1)[0].scramble_string
-        );
+        this.makeNewScramble();
       }
       if (this.checkAllow(e, "touchstart") && !this.isReady) {
         this.setTimeColor("#F15625");
@@ -126,17 +119,17 @@ export default {
     },
     onKeyUp(e) {
       if (
-        this.$store.state.isSideBarShow &&
+        this.isSideBarShow &&
         this.checkSideBarPosition("absolute") &&
         this.isTouchableArea(e)
       ) {
-        this.$store.commit("setSideBarState", false);
+        this.setSideBarState(false);
       }
 
       if (this.checkAllow(e, "touchend") && this.isReady) {
         console.log("Go!");
         this.resetTimer();
-        this.$store.commit("setPlayingState", true);
+        this.setPlayingState(true);
         this.interval = setInterval(this.increaseTime, 10);
       }
       if (this.checkAllow(e, "touchend")) {
@@ -145,7 +138,8 @@ export default {
         this.isPressed = false;
         this.isReady = false;
       }
-    }
+    },
+    ...mapMutations(["makeNewScramble", "setSideBarState", "setPlayingState"])
   },
   mounted() {
     window.addEventListener("keydown", this.onKeyDown);
