@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <input type="text" name="a" id="a" />
     <SideBar />
     <Contents />
   </div>
