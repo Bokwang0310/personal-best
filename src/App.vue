@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <input type="text" name="a" id="a" />
     <SideBar />
     <Contents />
   </div>
@@ -23,7 +22,6 @@ export default {
 * {
   margin: 0;
   font-family: "Roboto", sans-serif;
-  background-color: #fafafa;
 }
 
 html {
@@ -39,5 +37,23 @@ body,
 
 #app {
   display: flex;
+}
+
+@media (max-width: 1050px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 900px) {
+  html {
+    font-size: 6.5px;
+  }
+}
+
+@media (max-width: 700px) {
+  html {
+    font-size: 5px;
+  }
 }
 </style>

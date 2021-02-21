@@ -162,7 +162,7 @@ const isTouchableArea = e =>
 
 <style scoped>
 .time {
-  font-size: 10vmax;
+  font-size: 13rem;
   text-align: center;
 }
 </style>

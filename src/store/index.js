@@ -15,11 +15,11 @@ export default new Vuex.Store({
     makeNewScramble(state) {
       state.scramble = new Scrambow().get(1)[0].scramble_string;
     },
-    setPlayingState(state, newState) {
-      state.isPlaying = newState;
+    setPlayingState(state, payload) {
+      state.isPlaying = payload;
     },
-    setSideBarState(state, newState) {
-      state.isSideBarShow = newState;
+    setSideBarState(state, payload) {
+      state.isSideBarShow = payload;
     },
     toggleSideBar(state) {
       state.isSideBarShow = state.isSideBarShow ? false : true;

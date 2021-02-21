@@ -1,35 +1,64 @@
 <template>
-  <div class="sidebar-container">
-    <div
+  <div>
+    <sidebar-menu
       class="sidebar"
-      :class="isSideBarShow ? '' : 'collapsed'"
-      v-show="!isPlaying"
-    >
-      <div v-for="(item, i) in [1, 2, 3, 4, 5]" :key="i" class="list">
-        {{ `I have ${item}!` }}
-      </div>
-    </div>
-    <font-awesome-icon
-      class="menu"
-      icon="bars"
-      size="4x"
-      @click="toggleSideBar"
-      v-show="!isPlaying"
-    />
+      :menu="menu"
+      :disable-hover="true"
+      :relative="true"
+    ></sidebar-menu>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import { SidebarMenu } from "vue-sidebar-menu";
+// import dropdown from "vue-dropdowns";
+
+// <dropdown
+//         slot="dropdown-icon"
+//         class="dropdown"
+//         :options="options"
+//         :selected="selectedOption"
+//         @updateOption="methodToRunOnSelect"
+//       ></dropdown
+//     >
 
 export default {
   name: "SideBar",
+  data() {
+    return {
+      options: [{ name: "No Record" }, { name: "Record" }],
+      selectedOption: {
+        name: "Choose Mode"
+      },
+      menu: [
+        {
+          header: true,
+          title: "Header",
+          hiddenOnCollapse: true
+        },
+        {
+          href: "#",
+          title: "Play",
+          icon: "fa fa-play"
+        },
+        {
+          href: "#",
+          title: "Charts",
+          icon: "fa fa-chart-area"
+        }
+      ]
+    };
+  },
   computed: mapState(["isSideBarShow", "isPlaying"]),
   methods: {
     onKeyDown(e) {
       if (e.ctrlKey && e.key === "b") {
         this.toggleSideBar();
       }
+    },
+    methodToRunOnSelect(payload) {
+      this.selectedOption = payload;
     },
     ...mapMutations(["toggleSideBar"])
   },
@@ -38,52 +67,27 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener("keydown", this.onKeyDown);
-  }
+  },
+  components: { SidebarMenu /*dropdown*/ }
 };
 </script>
 
 <style scoped>
-.sidebar-container {
-  height: 100%;
-}
-
-.menu {
+.dropdown {
+  margin: 5rem;
   position: absolute;
-  margin-left: 2rem;
-  margin-top: 1.5rem;
-  cursor: pointer;
-  user-select: none;
 }
 
 .sidebar {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  overflow: auto;
-  float: left;
-  transition: width 0.35s;
-  background: #f2f2f2;
-  width: 350px;
-  box-shadow: 3px 0px 25px -13px rgba(0, 0, 0, 0.62);
+  width: 30rem;
 }
 
-.sidebar.collapsed {
-  width: 0;
-}
-
-@media (max-width: 700px) {
+/* @media (max-width: 700px) {
   .sidebar-container {
     position: absolute;
   }
   .sidebar {
     width: 75vw;
   }
-}
-
-.list {
-  font-size: 4rem;
-  background-color: #f2f2f2;
-}
+} */
 </style>
