@@ -2,8 +2,12 @@
 
 ## TODO
 
-- Set max font size
-- Delete inner sidebar, when sidebar is closing
+- Create night mode
+- Impl setting Page
+- Create custom color setting
+- Create records system
+- Create selecting event thing
+- Mobile non relative
 - Fix closing sidebar by clicking white space in mobile
 - Fix ctrl + b
 
