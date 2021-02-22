@@ -5,6 +5,8 @@
       :menu="menu"
       :disable-hover="true"
       :relative="true"
+      :showOneChild="true"
+      @item-click="onItemClick"
     ></sidebar-menu>
   </div>
 </template>
@@ -30,11 +32,22 @@ export default {
         },
         { component: Dropdown, hiddenOnCollapse: true },
         {
-          href: "#",
+          href: "/records",
           title: "Records",
           icon: "fas fa-history"
         },
-        { href: "#", title: "Events", icon: "" }
+        {
+          href: "/pages",
+          title: "Events",
+          icon: "cubing-icon event-333",
+          child: [
+            {
+              href: "/pages/333",
+              title: "3x3x3",
+              icon: "cubing-icon event-333"
+            }
+          ]
+        }
       ]
     };
   },
@@ -48,6 +61,7 @@ export default {
     methodToRunOnSelect(payload) {
       this.selectedOption = payload;
     },
+    onItemClick() {},
     ...mapMutations(["toggleSideBar"])
   },
   mounted() {
