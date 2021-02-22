@@ -1,19 +1,17 @@
 <template>
   <div id="app">
     <SideBar />
-    <Contents />
+    <router-view />
   </div>
 </template>
 
 <script>
 import SideBar from "./components/SideBar.vue";
-import Contents from "./components/Contents.vue";
 
 export default {
   name: "App",
   components: {
-    SideBar,
-    Contents
+    SideBar
   }
 };
 </script>

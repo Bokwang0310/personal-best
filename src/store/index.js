@@ -9,7 +9,11 @@ export default new Vuex.Store({
   state: {
     isPlaying: false,
     scramble: new Scrambow().get(1)[0].scramble_string,
-    isSideBarShow: false
+    isSideBarShow: false,
+    selectedOption: {
+      name: "Select Mode",
+      bool: true
+    }
   },
   mutations: {
     makeNewScramble(state) {
@@ -23,6 +27,9 @@ export default new Vuex.Store({
     },
     toggleSideBar(state) {
       state.isSideBarShow = state.isSideBarShow ? false : true;
+    },
+    setSelectedOption(state, payload) {
+      state.selectedOption = payload;
     }
   }
 });

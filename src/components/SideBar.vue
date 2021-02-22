@@ -7,6 +7,8 @@
       :relative="true"
       :showOneChild="true"
       @item-click="onItemClick"
+      :collapsed="isSideBarShow"
+      v-show="!isPlaying"
     ></sidebar-menu>
   </div>
 </template>
@@ -15,51 +17,49 @@
 import { mapState, mapMutations } from "vuex";
 import { SidebarMenu } from "vue-sidebar-menu";
 import Dropdown from "./Dropdown.vue";
+import Separator from "./Separator.vue";
 
 export default {
   name: "SideBar",
-  data() {
-    return {
-      options: [{ name: "No Record" }, { name: "Record" }],
-      selectedOption: {
-        name: "Choose Mode"
-      },
-      menu: [
+  computed: {
+    menu() {
+      return [
         {
           header: true,
           title: "Personal Best",
           hiddenOnCollapse: true
         },
         { component: Dropdown, hiddenOnCollapse: true },
+        { href: "/", title: "Timer", icon: "fas fa-stopwatch" },
+        { href: "/setting", title: "Settings", icon: "fa fa-cog" },
         {
-          href: "/records",
-          title: "Records",
-          icon: "fas fa-history"
+          component: Separator,
+          props: {
+            color: "#ffffff"
+          }
         },
         {
-          href: "/pages",
           title: "Events",
           icon: "cubing-icon event-333",
           child: [
-            {
-              href: "/pages/333",
-              title: "3x3x3",
-              icon: "cubing-icon event-333"
-            }
+            { title: "3x3x3", icon: "cubing-icon event-333" },
+            { title: "2x2x2", icon: "cubing-icon event-222" },
+            { title: "4x4x4", icon: "cubing-icon event-444" }
           ]
+        },
+        {
+          title: "Records",
+          icon: "fas fa-history",
+          hidden: !this.selectedOption.bool,
+          child: [{ title: "1" }]
         }
-      ]
-    };
+      ];
+    },
+    ...mapState(["isSideBarShow", "isPlaying", "selectedOption"])
   },
-  computed: mapState(["isSideBarShow", "isPlaying"]),
   methods: {
     onKeyDown(e) {
-      if (e.ctrlKey && e.key === "b") {
-        this.toggleSideBar();
-      }
-    },
-    methodToRunOnSelect(payload) {
-      this.selectedOption = payload;
+      if (e.ctrlKey && e.key === "b") this.toggleSideBar();
     },
     onItemClick() {},
     ...mapMutations(["toggleSideBar"])

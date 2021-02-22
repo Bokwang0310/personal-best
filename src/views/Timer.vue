@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import Scramble from "./Scramble.vue";
-import StopWatch from "./StopWatch.vue";
+import Scramble from "@/components/Scramble.vue";
+import StopWatch from "@/components/StopWatch.vue";
 
 export default {
-  name: "Contents",
+  name: "Timer",
   components: {
     Scramble,
     StopWatch
