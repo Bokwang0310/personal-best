@@ -12,16 +12,7 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 import { SidebarMenu } from "vue-sidebar-menu";
-// import dropdown from "vue-dropdowns";
-
-// <dropdown
-//         slot="dropdown-icon"
-//         class="dropdown"
-//         :options="options"
-//         :selected="selectedOption"
-//         @updateOption="methodToRunOnSelect"
-//       ></dropdown
-//     >
+import Dropdown from "./Dropdown.vue";
 
 export default {
   name: "SideBar",
@@ -34,19 +25,16 @@ export default {
       menu: [
         {
           header: true,
-          title: "Header",
+          title: "Personal Best",
           hiddenOnCollapse: true
         },
+        { component: Dropdown, hiddenOnCollapse: true },
         {
           href: "#",
-          title: "Play",
-          icon: "fa fa-play"
+          title: "Records",
+          icon: "fas fa-history"
         },
-        {
-          href: "#",
-          title: "Charts",
-          icon: "fa fa-chart-area"
-        }
+        { href: "#", title: "Events", icon: "" }
       ]
     };
   },
@@ -68,18 +56,14 @@ export default {
   beforeDestroy() {
     window.removeEventListener("keydown", this.onKeyDown);
   },
-  components: { SidebarMenu /*dropdown*/ }
+  components: { SidebarMenu }
 };
 </script>
 
 <style scoped>
-.dropdown {
-  margin: 5rem;
-  position: absolute;
-}
-
 .sidebar {
-  width: 30rem;
+  width: 300px;
+  font-size: 20px;
 }
 
 /* @media (max-width: 700px) {

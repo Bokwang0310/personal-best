@@ -14,6 +14,9 @@ Vue.use(VueSideBarMenu);
 library.add(faBars);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
+import dropdown from "vue-dropdowns";
+Vue.component("dropdown", dropdown);
+
 Vue.config.productionTip = false;
 
 new Vue({
