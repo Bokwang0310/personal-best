@@ -6,7 +6,6 @@
       :disable-hover="true"
       :relative="true"
       :showOneChild="true"
-      @item-click="onItemClick"
       :collapsed="isSideBarShow"
       v-show="!isPlaying"
     ></sidebar-menu>
@@ -30,7 +29,35 @@ export default {
           hiddenOnCollapse: true
         },
         { component: Dropdown, hiddenOnCollapse: true },
-        { href: "/", title: "Timer", icon: "fas fa-stopwatch" },
+        {
+          href: "/timer",
+          title: "Timer",
+          icon: `cubing-icon ${this.currentEvent.icon}`,
+          child: [
+            {
+              header: true,
+              title: "Events"
+            },
+            {
+              href: "/timer/333",
+              title: "3x3x3",
+              icon: "cubing-icon event-333",
+              type: "event"
+            },
+            {
+              href: "/timer/222",
+              title: "2x2x2",
+              icon: "cubing-icon event-222",
+              type: "event"
+            },
+            {
+              href: "/timer/444",
+              title: "4x4x4",
+              icon: "cubing-icon event-444",
+              type: "event"
+            }
+          ]
+        },
         { href: "/setting", title: "Settings", icon: "fa fa-cog" },
         {
           component: Separator,
@@ -39,29 +66,24 @@ export default {
           }
         },
         {
-          title: "Events",
-          icon: "cubing-icon event-333",
-          child: [
-            { title: "3x3x3", icon: "cubing-icon event-333" },
-            { title: "2x2x2", icon: "cubing-icon event-222" },
-            { title: "4x4x4", icon: "cubing-icon event-444" }
-          ]
-        },
-        {
           title: "Records",
           icon: "fas fa-history",
           hidden: !this.selectedOption.bool,
-          child: [{ title: "1" }]
+          child: [{ title: "Under Development", disabled: true }]
         }
       ];
     },
-    ...mapState(["isSideBarShow", "isPlaying", "selectedOption"])
+    ...mapState([
+      "isSideBarShow",
+      "isPlaying",
+      "selectedOption",
+      "currentEvent"
+    ])
   },
   methods: {
     onKeyDown(e) {
       if (e.ctrlKey && e.key === "b") this.toggleSideBar();
     },
-    onItemClick() {},
     ...mapMutations(["toggleSideBar"])
   },
   mounted() {
@@ -87,5 +109,10 @@ export default {
   .sidebar {
     width: 75vw;
   }
+} */
+
+/* .router-link-active {
+  font-weight:600;
+  -webkit-box-shadow:3px 0px 0px 0px #4285f4 inset;box-shadow:3px 0px 0px 0px #4285f4 inset;
 } */
 </style>

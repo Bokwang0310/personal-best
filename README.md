@@ -19,3 +19,4 @@
 - [Side Bar](https://yaminncco.github.io/vue-sidebar-menu/#/)
 - [Side Bar Ref](https://github.com/yaminncco/vue-sidebar-menu/blob/master/demo/App.vue)
 - [Dropdown](https://github.com/mikerodham/vue-dropdowns)
+- [Events Icon](https://github.com/cubing/icons#readme)
