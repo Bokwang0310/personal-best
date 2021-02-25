@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import SideBar from "@/components/SideBar.vue";
 
 export default {
@@ -19,10 +19,10 @@ export default {
     onResize() {
       if (window.innerWidth <= 767) {
         this.setMobileState(true);
-        this.setSideBarState(true);
+        this.setSideBarState(false);
       } else {
         this.setMobileState(false);
-        this.setSideBarState(false);
+        this.setSideBarState(true);
       }
     },
     onKeyDown(e) {

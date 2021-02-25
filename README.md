@@ -2,13 +2,10 @@
 
 ## TODO
 
-- Mobile non relative
 - Create night mode
 - Impl setting Page
 - Create custom color setting
 - Create records system
-- Fix closing sidebar by clicking white space in mobile
-- Fix ctrl + b
 
 ### Ref
 

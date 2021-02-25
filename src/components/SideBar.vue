@@ -4,11 +4,18 @@
       class="sidebar"
       :menu="menu"
       :disable-hover="true"
-      :relative="isOnMobile ? false : true"
+      :relative="!isOnMobile"
       :showOneChild="true"
-      :collapsed="isSideBarShow"
+      :collapsed="!isSideBarShow"
       v-show="!isPlaying"
+      @toggle-collapse="onToggleCollapse"
     ></sidebar-menu>
+    <div
+      v-if="isOnMobile && isSideBarShow"
+      class="overlay"
+      @touchend="setSideBarState(false)"
+      @click="setSideBarState(false)"
+    />
   </nav>
 </template>
 
@@ -20,6 +27,15 @@ import Separator from "./Separator.vue";
 
 export default {
   name: "SideBar",
+  methods: {
+    onToggleCollapse(collapsed) {
+      this.setSideBarState(!collapsed);
+    },
+    listener(e) {
+      console.log(e);
+    },
+    ...mapMutations(["setSideBarState", "setMobileState"])
+  },
   computed: {
     menu() {
       return [
@@ -81,7 +97,6 @@ export default {
       "isOnMobile"
     ])
   },
-  methods: mapMutations(["setSideBarState", "setMobileState"]),
   components: { SidebarMenu }
 };
 </script>
@@ -90,5 +105,16 @@ export default {
 .sidebar {
   width: 300px;
   font-size: 20px;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 900;
 }
 </style>

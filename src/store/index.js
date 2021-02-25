@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     isPlaying: false,
     scramble: null,
-    isSideBarShow: false,
+    isSideBarShow: true,
     selectedOption: { name: "No Record", bool: false },
     currentEvent: {
       name: "3x3x3",
@@ -31,7 +31,7 @@ export default new Vuex.Store({
       state.isSideBarShow = payload;
     },
     toggleSideBar(state) {
-      state.isSideBarShow = state.isSideBarShow ? false : true;
+      state.isSideBarShow = !state.isSideBarShow;
     },
     setSelectedOption(state, payload) {
       state.selectedOption = payload;
