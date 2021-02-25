@@ -1,7 +1,7 @@
 <template>
-  <div class="scramble" v-show="!isPlaying">
+  <section class="scramble" v-show="!isPlaying">
     {{ scramble }}
-  </div>
+  </section>
 </template>
 
 <script>

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <SideBar />
-    <div class="contents" :class="isOnMobile ? 'onmobile' : ''">
+    <main class="contents" :class="isOnMobile ? 'onmobile' : ''">
       <router-view />
-    </div>
+    </main>
   </div>
 </template>
 

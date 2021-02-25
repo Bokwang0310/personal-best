@@ -1,7 +1,7 @@
 <template>
-  <div class="time" :style="timeStyle">
+  <section class="time" :style="timeStyle">
     {{ timeStr }}
-  </div>
+  </section>
 </template>
 
 <script>

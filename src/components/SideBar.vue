@@ -42,7 +42,8 @@ export default {
         {
           header: true,
           title: "Personal Best",
-          hiddenOnCollapse: true
+          hiddenOnCollapse: true,
+          element: "header"
         },
         { component: Dropdown, hiddenOnCollapse: true },
         {

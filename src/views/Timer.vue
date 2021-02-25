@@ -1,8 +1,8 @@
 <template>
-  <div class="timer-container">
+  <article class="timer-container">
     <Scramble />
     <StopWatch />
-  </div>
+  </article>
 </template>
 
 <script>
