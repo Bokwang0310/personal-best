@@ -1,17 +1,43 @@
 <template>
   <div id="app">
     <SideBar />
-    <router-view />
+    <div class="contents" :class="isOnMobile ? 'onmobile' : ''">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
-import SideBar from "./components/SideBar.vue";
+import { mapMutations, mapState } from "vuex";
+import SideBar from "@/components/SideBar.vue";
 
 export default {
   name: "App",
-  components: {
-    SideBar
+  computed: mapState(["isOnMobile"]),
+  components: { SideBar },
+  methods: {
+    onResize() {
+      if (window.innerWidth <= 767) {
+        this.setMobileState(true);
+        this.setSideBarState(true);
+      } else {
+        this.setMobileState(false);
+        this.setSideBarState(false);
+      }
+    },
+    onKeyDown(e) {
+      if (e.ctrlKey && e.key === "b") this.toggleSideBar();
+    },
+    ...mapMutations(["setSideBarState", "setMobileState", "toggleSideBar"])
+  },
+  mounted() {
+    this.onResize();
+    window.addEventListener("resize", this.onResize);
+    window.addEventListener("keydown", this.onKeyDown);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("keydown", this.onKeyDown);
   }
 };
 </script>
@@ -35,6 +61,15 @@ body,
 
 #app {
   display: flex;
+}
+
+.contents {
+  height: 100%;
+  width: 100%;
+}
+
+.onmobile {
+  margin-left: 50px;
 }
 
 @media (max-width: 1050px) {

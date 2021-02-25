@@ -15,7 +15,8 @@ export default new Vuex.Store({
       name: "3x3x3",
       scrambleType: "333",
       icon: "event-333"
-    }
+    },
+    isOnMobile: false
   },
   mutations: {
     makeNewScramble(state) {
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     setCurrentEvent(state, event) {
       state.currentEvent = getEvent(event);
+    },
+    setMobileState(state, payload) {
+      state.isOnMobile = payload;
     }
   }
 });

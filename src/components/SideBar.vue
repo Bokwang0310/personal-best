@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <nav>
     <sidebar-menu
       class="sidebar"
       :menu="menu"
       :disable-hover="true"
-      :relative="true"
+      :relative="isOnMobile ? false : true"
       :showOneChild="true"
       :collapsed="isSideBarShow"
       v-show="!isPlaying"
     ></sidebar-menu>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -77,21 +77,11 @@ export default {
       "isSideBarShow",
       "isPlaying",
       "selectedOption",
-      "currentEvent"
+      "currentEvent",
+      "isOnMobile"
     ])
   },
-  methods: {
-    onKeyDown(e) {
-      if (e.ctrlKey && e.key === "b") this.toggleSideBar();
-    },
-    ...mapMutations(["toggleSideBar"])
-  },
-  mounted() {
-    window.addEventListener("keydown", this.onKeyDown);
-  },
-  beforeDestroy() {
-    window.removeEventListener("keydown", this.onKeyDown);
-  },
+  methods: mapMutations(["setSideBarState", "setMobileState"]),
   components: { SidebarMenu }
 };
 </script>
@@ -101,18 +91,4 @@ export default {
   width: 300px;
   font-size: 20px;
 }
-
-/* @media (max-width: 700px) {
-  .sidebar-container {
-    position: absolute;
-  }
-  .sidebar {
-    width: 75vw;
-  }
-} */
-
-/* .router-link-active {
-  font-weight:600;
-  -webkit-box-shadow:3px 0px 0px 0px #4285f4 inset;box-shadow:3px 0px 0px 0px #4285f4 inset;
-} */
 </style>

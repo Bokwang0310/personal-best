@@ -11,7 +11,7 @@ export default {
 <style scoped>
 div {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   text-align: center;
   font-size: 10rem;
 }

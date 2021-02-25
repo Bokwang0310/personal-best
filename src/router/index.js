@@ -8,6 +8,7 @@ import Setting from "../views/Setting.vue";
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/", redirect: "/timer/333" },
   { path: "/timer/:event?", component: Timer },
   { path: "/setting", component: Setting }
 ];

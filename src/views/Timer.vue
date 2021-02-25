@@ -1,5 +1,5 @@
 <template>
-  <div class="contents-container">
+  <div class="timer-container">
     <Scramble />
     <StopWatch />
   </div>
@@ -19,11 +19,11 @@ export default {
 </script>
 
 <style scoped>
-.contents-container {
+.timer-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   height: 100%;
-  width: 100vw;
+  width: 100%;
 }
 </style>
