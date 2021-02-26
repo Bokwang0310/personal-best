@@ -2,9 +2,8 @@
 
 ## TODO
 
-- Create night mode
-- Impl setting Page
-- Create custom color setting
+- Prevent Drag
+- Impl setting Page (theme, night mode)
 - Create records system
 
 ### Ref

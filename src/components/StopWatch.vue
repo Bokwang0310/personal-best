@@ -95,7 +95,6 @@ export default {
     },
     onKeyDown(e) {
       if (this.checkAllow(e, "touchstart") && this.isPlaying) {
-        console.log("stop");
         this.setPlayingState(false);
         clearInterval(this.interval);
         this.makeNewScramble();
@@ -119,7 +118,6 @@ export default {
       }
 
       if (this.checkAllow(e, "touchend") && this.isReady) {
-        console.log("Go!");
         this.resetTimer();
         this.setPlayingState(true);
         this.interval = setInterval(this.increaseTime, 10);

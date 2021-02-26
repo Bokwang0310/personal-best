@@ -9,7 +9,14 @@
       :collapsed="!isSideBarShow"
       v-show="!isPlaying"
       @toggle-collapse="onToggleCollapse"
-    ></sidebar-menu>
+    >
+      <i
+        slot="toggle-icon"
+        class="fas fa-arrows-alt-h"
+        aria-label="Toggle Collapse Button"
+      />
+      <i slot="dropdown-icon" class="fas fa-chevron-down" />
+    </sidebar-menu>
     <div
       v-if="isOnMobile && isSideBarShow"
       class="overlay"
@@ -31,9 +38,6 @@ export default {
     onToggleCollapse(collapsed) {
       this.setSideBarState(!collapsed);
     },
-    listener(e) {
-      console.log(e);
-    },
     ...mapMutations(["setSideBarState", "setMobileState"])
   },
   computed: {
@@ -50,6 +54,7 @@ export default {
           href: "/timer",
           title: "Timer",
           icon: `cubing-icon ${this.currentEvent.icon}`,
+          attributes: { "aria-label": "Timer Page" },
           child: [
             {
               header: true,
@@ -75,7 +80,14 @@ export default {
             }
           ]
         },
-        { href: "/setting", title: "Settings", icon: "fa fa-cog" },
+        {
+          href: "/setting",
+          title: "Settings",
+          icon: "fa fa-cog",
+          attributes: {
+            "aria-label": "Setting Page"
+          }
+        },
         {
           component: Separator,
           props: {

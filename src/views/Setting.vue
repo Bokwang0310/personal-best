@@ -1,5 +1,7 @@
 <template>
-  <section>Setting Page</section>
+  <section>
+    <article>Working on it</article>
+  </section>
 </template>
 
 <script>
@@ -10,9 +12,14 @@ export default {
 
 <style scoped>
 section {
+  display: flex;
   width: 100%;
   height: 100%;
-  text-align: center;
-  font-size: 10rem;
+  justify-content: center;
+  align-items: center;
+}
+
+article {
+  font-size: 6rem;
 }
 </style>
