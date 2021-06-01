@@ -5,6 +5,7 @@
 - Prevent Drag
 - Impl setting Page (theme, night mode)
 - Create records system
+- Delete padding-left when playing
 
 ### Ref
 
